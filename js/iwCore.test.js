@@ -53,3 +53,21 @@ test('Check isChild() function is able to check if an element is child of a pare
   expect(iwCore.isChild(text, icon)).toBe(true);
   expect(iwCore.isChild(wrapper, foo)).toBe(false);
 })
+
+/**
+ * Test hasClass function
+ */
+test('Check toggleClassName() function is correctly toggling the class', () => {
+  document.body.innerHTML = `
+    <div class="target"></div>
+  `
+
+  const target = document.querySelector('.target');
+  iwCore.toggleClassName(target, 'active');
+  const result1 = target.classList.contains('active');
+  iwCore.toggleClassName(target, 'active');
+  const result2 = target.classList.contains('active');
+
+  expect(result1).toBe(true);
+  expect(result2).toBe(false);
+})
