@@ -71,3 +71,28 @@ test('Check toggleClassName() function is correctly toggling the class', () => {
   expect(result1).toBe(true);
   expect(result2).toBe(false);
 })
+
+/**
+ * Test convertHtmlStringToNodeList
+ */
+describe('convertHtmlStringToNodeList', () => {
+  
+  test('convertHtmlStringToNodeList with targetEl', () => {
+    const targetEl = document.createElement('div');
+    const HtmlString = '<div>Test</div>';
+    iwCore.convertHtmlStringToNodeList(HtmlString, targetEl);
+    expect(targetEl.innerHTML).toBe('<div>Test</div>');
+  });
+  
+  test('convertHtmlStringToNodeList without targetEl', () => {
+    const HtmlString = '<div>Test</div>';
+    const body = document.createElement('body');
+    const results = iwCore.convertHtmlStringToNodeList(HtmlString);
+    
+    while (results[0]) {
+      body.appendChild(results[0]);
+    }
+    
+    expect(body.innerHTML).toBe('<div>Test</div>');
+ 	});
+});

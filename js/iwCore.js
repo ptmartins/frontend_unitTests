@@ -57,6 +57,18 @@ const iwCore = {
             node = node.parentNode;
         }
         return false;
+    },
+    convertHtmlStringToNodeList: function(HtmlString, targetEl) {	
+        var parser = new DOMParser();	
+        if(targetEl) {		
+            var results = parser.parseFromString(HtmlString, "text/html").body.childNodes;		
+            
+            while (results[0]) {			
+                targetEl.appendChild(results[0]);		
+            }	
+        } else {		
+            return parser.parseFromString(HtmlString, "text/html").body.childNodes;	
+        }
     }
 };
 
