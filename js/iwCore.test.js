@@ -96,3 +96,34 @@ describe('convertHtmlStringToNodeList', () => {
     expect(body.innerHTML).toBe('<div>Test</div>');
  	});
 });
+
+/**
+ * Test sortFiles
+ */
+describe('Check sortFiles() function is sorting files', () => {
+  const alphabetical = [{name:'A'}, {name:'C'}, {name:'D'}, {name:'B'}, {name:'F'}, {name:'E'}],
+        alphabeticalResult = [{name:'A'}, {name:'B'}, {name:'C'}, {name:'D'}, {name:'E'}, {name:'F'}],
+        numerical = [{name:'4'}, {name:'5'}, {name:'1'}, {name:'3'}, {name:'2'}, {name:'6'}],
+        numericalResult = [{name:'1'}, {name:'2'}, {name:'3'}, {name:'4'}, {name:'5'}, {name:'6'}],
+        alphaNumerical = [{name:'01-clip-003'}, {name:'01-clip-000'}, {name:'01-clip-005'}, {name:'01-clip-001'}, {name:'01-clip-004'},     {name:'01-clip-002'}],
+        alphaNumericalResult = [{name:'01-clip-000'}, {name:'01-clip-001'}, {name:'01-clip-002'}, {name:'01-clip-003'}, {name:'01-clip-004'}, {name:'01-clip-005'}],
+        random = [{name:'clip-003'}, {name:'clip-000'}, {name:'clip-005'}, {name:'clip-001'}, {name:'clip-004'}, {name:'clip-002'}],
+        randomResult = [{name:'clip-000'}, {name:'clip-001'}, {name:'clip-002'}, {name:'clip-003'}, {name:'clip-004'}, {name:'clip-005'}];
+
+  test('Sort alphabetical', () => {
+    expect(iwCore.sortFiles(alphabetical)).toEqual(alphabeticalResult);
+  })
+
+  test('Sort numerical', () => {
+    expect(iwCore.sortFiles(numerical)).toEqual(numericalResult);
+  })
+
+  test('Sort alpha-numerical', () => {
+    expect(iwCore.sortFiles(alphaNumerical)).toEqual(alphaNumericalResult);
+  })
+
+  test('Sort randomString', () => {
+    expect(iwCore.sortFiles(random)).toEqual(randomResult);
+  })
+
+})

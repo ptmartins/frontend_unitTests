@@ -69,6 +69,25 @@ const iwCore = {
         } else {		
             return parser.parseFromString(HtmlString, "text/html").body.childNodes;	
         }
+    },
+    sortFiles: function(files) {
+        let myArray = [].slice.call(files);
+
+        return myArray.sort(function(a, b) {
+           let matchA = a.name.match(/^\d+$/),
+               matchB = b.name.match(/^\d+$/);
+           if (matchA && matchB) {
+               let aInt = parseInt(matchA[0], 10),
+                   bInt = parseInt(matchB[0], 10);
+               return aInt > bInt ? 1 : aInt < bInt ? -1 : 0;
+           } else if (matchA) {
+               return -1;
+           } else if (matchB) {
+                return 1;
+           } else {
+               return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 0;
+           }
+        });
     }
 };
 
